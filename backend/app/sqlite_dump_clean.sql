@@ -346,21 +346,16 @@ INSERT INTO products VALUES(315,'Orlando Dog Snacks Assorted','',0.75,'Pet Care'
 INSERT INTO products VALUES(316,'Orlando Meaty Strips for Dogs Assorted','',0.4899999999999999912,'Pet Care','https://seleniumwebsites.fra1.digitaloceanspaces.com/grocery/Orlando_Meaty_Strips_for_Dogs_Assorted.jpg',FALSE);
 INSERT INTO products VALUES(317,'Orlando Premium Dog Snacks Pig Ears / Mini','',2.589999999999999858,'Pet Care','https://seleniumwebsites.fra1.digitaloceanspaces.com/grocery/Orlando_Premium_Dog_Snacks_Pig_Ears___Mini.jpg',FALSE);
 INSERT INTO products VALUES(318,'Orlando Dog Dental Sticks','',0.6500000000000000222,'Pet Care','https://seleniumwebsites.fra1.digitaloceanspaces.com/grocery/Orlando_Dog_Dental_Sticks.jpg',FALSE);
+
 CREATE TABLE reviews (
-
     id SERIAL PRIMARY KEY,
-
     product_id INTEGER NOT NULL,
-
     author TEXT NOT NULL,
-
     rating REAL NOT NULL,
-
     comment TEXT,
-
     FOREIGN KEY (product_id) REFERENCES products (id)
-
 );
+
 INSERT INTO reviews VALUES(1,1,'John',5.0,'These oranges are the sweetest I''ve ever tasted. Highly recommend!');
 INSERT INTO reviews VALUES(2,1,'Emily',4.0,'The oranges are juicy and flavorful, but a bit pricey.');
 INSERT INTO reviews VALUES(3,1,'David',3.0,'The oranges are okay, but not as fresh as I expected.');
