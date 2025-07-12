@@ -5,3 +5,5 @@ frontend/src/config.js~
 venv/
 .idea/terraform.xml
 .gitattributes
+*/.terraform/
+infrastructure/.terraform/
