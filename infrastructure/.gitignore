@@ -5,14 +5,19 @@
 backend.tf
 
 # Terraform cache & lock file
-.terraform
+.terraform/                 # Local .terraform directory
 .terraform.lock.hcl
 
-# Sensitive variable files
+# Terraform sensitive variable files
 terraform.tfvars
 *.auto.tfvars
+*.tfplan                   # Terraform plan output files
 
-# Ignore personal credentials
+# Ignore user-specific config files
+.terraformrc
+terraform.rc
+
+# Private keys and secrets
 *.pem
 *.key
 id_rsa*
@@ -21,6 +26,13 @@ id_ed25519*
 credentials.json
 secrets/
 
-# Ignore logs and debug files
+# Logs and crash/debug output
 *.log
 crash.log
+
+# OS-generated files
+.DS_Store                  # macOS Finder metadata
+
+# Editor-specific files
+.vscode/                   # VS Code settings
+*.code-workspace
