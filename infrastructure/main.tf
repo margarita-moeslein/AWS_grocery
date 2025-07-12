@@ -1,22 +1,62 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
 provider "aws" {
-  region = "us-east-1"
+    region  = var.aws_region
+    profile = var.profile
 }
 
-resource "aws_instance" "web" {
-  ami           = "ami-09042b2f6d07d164a"
-  instance_type = "t2.micro"
+resource "aws_security_group" "web_sg_m" {
+    name        = "web_sg"
+    description = "Allow HTTP and SSH traffic"
 
-  tags = {
-    Name = "grocerymate-ec2"
-  }
+    ingress {
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["176.4.179.5/32"]
+    }
+
+    ingress {
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 }
+
+resource "aws_instance" "web_server_m" {
+    ami = var.ami
+    instance_type               = var.instance_type
+    key_name                    = var.key_pair_name
+    security_groups             = [aws_security_group.web_sg_m.name]
+    associate_public_ip_address = true
+
+    tags = {
+        Name = var.instance_name
+    }
+
+    user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y httpd
+              systemctl start httpd
+              systemctl enable httpd
+              echo "Hello, World!" › /var/www/html/index.html
+              EOF
+}
+
+
+# resource "aws_s3_bucket" "avatars" {
+#   bucket = "grocerymate-avatars"
+#
+#   tags = {
+#     Name        = "grocerymate-avatars"
+#     Environment = "Dev"
+#   }
+# }
 
