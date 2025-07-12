@@ -5,7 +5,8 @@
 backend.tf
 
 # Terraform cache & lock file
-.terraform/                 # Local .terraform directory
+*/.terraform/
+infrastructure/.terraform/              # Local .terraform directory
 .terraform.lock.hcl
 
 # Terraform sensitive variable files
