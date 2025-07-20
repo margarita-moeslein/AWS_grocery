@@ -50,13 +50,11 @@ resource "aws_instance" "web_server_m" {
               EOF
 }
 
+resource "aws_s3_bucket" "avatars-m" {
+  bucket = "grocerymate-avatars-m"
 
-# resource "aws_s3_bucket" "avatars" {
-#   bucket = "grocerymate-avatars"
-#
-#   tags = {
-#     Name        = "grocerymate-avatars"
-#     Environment = "Dev"
-#   }
-# }
-
+  tags = {
+    Name        = "grocerymate-avatars-m"
+    Environment = "Dev"
+  }
+}
