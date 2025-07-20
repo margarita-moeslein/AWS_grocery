@@ -6,4 +6,3 @@ venv/
 .idea/terraform.xml
 .gitattributes
 */.terraform/
-*.tfstate.*
